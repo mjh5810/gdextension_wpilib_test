@@ -5,8 +5,10 @@
 #include <godot_cpp/classes/node.hpp>
 
 #include <frc/TimedRobot.h>
-#include <frc/drive/DifferentialDrive.h>
+//#include <frc/drive/DifferentialDrive.h>
 //#include <frc/motorcontrol/PWMSparkMax.h>
+
+#include "gdrobot.h"
 
 namespace godot {
 
@@ -30,7 +32,7 @@ class GDWPINode : public Node {
     GDCLASS(GDWPINode, Node)
 
 private:
-    frc::TimedRobot robot;
+    GDRobot* robot;
 
 protected:
     static void _bind_methods();

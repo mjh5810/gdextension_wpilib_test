@@ -26,7 +26,9 @@ env.Append(CPPPATH=["src/",
                     "allwpilib/ntcore/src/main/native/include/",
                     "allwpilib/ntcore/src/generated/main/native/include/",
                     "allwpilib/wpinet/src/main/native/include/"],
-            CXXFLAGS="/std:c++20")
+            CXXFLAGS=["-std=c++20", "-fexceptions"],
+            LIBPATH=["demo/bin/"],
+            LIBS=["libntcore", "libwpilibc", "libwpiutil", "libwpimath"])
 sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":

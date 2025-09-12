@@ -13,6 +13,7 @@ void initialize_wpi_module(ModuleInitializationLevel p_level) {
     }
 
     GDREGISTER_RUNTIME_CLASS(GDExample);
+    GDREGISTER_RUNTIME_CLASS(GDWPINode);
 }
 
 void uninitialize_wpi_module(ModuleInitializationLevel p_level) {

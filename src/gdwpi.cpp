@@ -25,5 +25,9 @@ void GDWPINode::_bind_methods() {
 }
 
 GDWPINode::GDWPINode() {
-    
+    //robot = new GDRobot ();
+}
+
+GDWPINode::~GDWPINode() {
+
 }
