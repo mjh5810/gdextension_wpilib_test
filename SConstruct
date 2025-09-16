@@ -55,4 +55,9 @@ else:
         source=sources,
     )
 
+if env["platform"] == "linux":
+    env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
+elif env["platform"] == "windows":
+    env.Append(CXXFLAGS=["/std:c++20"])
+
 Default(library)
