@@ -18,17 +18,41 @@
           scons
           cmake
           libgcc
+          #libgccjit
           godot_4_4
           ninja
           protobuf
-          pkgsCross.mingwW64.buildPackages.gcc
-          pkgsCross.mingwW64.windows.mcfgthreads
-          pkgsCross.mingwW64.windows.mingw_w64_pthreads
-          pkgsCross.mingwW64.windows.mingw_w64_headers
+          libssh
+          zlib
+          libatomic_ops
+          #xorg.libX11.dev
+          xorg.libXrandr
+          xorg.libXinerama
+          xorg.libXcursor
+          xorg.libXi
+          glfw
+          opencv
+          wayland
+          wayland-scanner
+          wayland-protocols
+          #pkgsCross.mingwW64.buildPackages.gcc
+          #pkgsCross.mingwW64.windows.mcfgthreads
+          #pkgsCross.mingwW64.windows.mingw_w64_pthreads
+          #pkgsCross.mingwW64.windows.mingw_w64_headers
           #pkgsCross.mingw32.threads
-          windows.sdk
+          #windows.sdk
           #windows.mingw_w64
         ];
+        buildInputs = with pkgs; [
+          xorg.libX11
+          xorg.libX11.dev
+          xorg.libXrandr
+          xorg.libXinerama
+          xorg.libXcursor
+          xorg.libXi
+          glfw
+        ];
+        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.xorg.libX11 pkgs.libGL ];
       };
     }
   );
