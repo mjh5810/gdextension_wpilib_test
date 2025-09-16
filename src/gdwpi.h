@@ -4,11 +4,7 @@
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/node.hpp>
 
-#include <frc/TimedRobot.h>
-//#include <frc/drive/DifferentialDrive.h>
-//#include <frc/motorcontrol/PWMSparkMax.h>
-
-#include "gdrobot.h"
+#include <networktables/NetworkTableInstance.h>
 
 namespace godot {
 
@@ -32,7 +28,8 @@ class GDWPINode : public Node {
     GDCLASS(GDWPINode, Node)
 
 private:
-    GDRobot* robot;
+    //GDRobot* robot;
+    nt::NetworkTableInstance ntInst;
 
 protected:
     static void _bind_methods();

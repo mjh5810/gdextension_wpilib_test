@@ -1,5 +1,10 @@
 #include "gdwpi.h"
 #include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
+
+#include <fmt/format.h>
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
 
 using namespace godot;
 
@@ -25,7 +30,10 @@ void GDWPINode::_bind_methods() {
 }
 
 GDWPINode::GDWPINode() {
-    //robot = new GDRobot ();
+    ntInst = nt::NetworkTableInstance::GetDefault();
+    auto table = ntInst.GetTable("datatable");
+
+    print_line("test");
 }
 
 GDWPINode::~GDWPINode() {
