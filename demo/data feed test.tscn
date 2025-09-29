@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4g67yhxcoj0p"]
+
+[ext_resource type="Texture2D" uid="uid://blnvvn2hsuq2y" path="res://icon.svg" id="1_1qbex"]
+[ext_resource type="Script" uid="uid://dppghevnidhi8" path="res://test_datafeed.gd" id="1_a5e8f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qbex"]
+albedo_texture = ExtResource("1_1qbex")
+
+[sub_resource type="Environment" id="Environment_1qbex"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material = SubResource("StandardMaterial3D_1qbex")
+script = ExtResource("1_a5e8f")
+
+[node name="GDNetworkTable" type="GDNetworkTable" parent="CSGBox3D"]
+fetchlist = ["xRot", "yRot", "zRot"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.935832, 0.352446, 0, -0.352446, 0.935832, -0.210518, 1.12803, 2.39931)
+environment = SubResource("Environment_1qbex")
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.907081, 0.420957, 0, -0.420957, 0.907081, 0, 1.21758, 0)

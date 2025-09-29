@@ -35,13 +35,19 @@
           wayland
           wayland-scanner
           wayland-protocols
-          #pkgsCross.mingwW64.buildPackages.gcc
+          gradle
+          openjdk17
+          pkgsCross.mingwW64.buildPackages.gcc
           #pkgsCross.mingwW64.windows.mcfgthreads
           #pkgsCross.mingwW64.windows.mingw_w64_pthreads
           #pkgsCross.mingwW64.windows.mingw_w64_headers
           #pkgsCross.mingw32.threads
           #windows.sdk
           #windows.mingw_w64
+          ccls
+          (pkgsCross.mingwW64.windows.mcfgthreads.overrideAttrs {
+            dontDisableStatic = true;
+          })
         ];
         buildInputs = with pkgs; [
           xorg.libX11
@@ -53,6 +59,7 @@
           glfw
         ];
         LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.xorg.libX11 pkgs.libGL ];
+        hardeningDisable = ["all"];
       };
     }
   );

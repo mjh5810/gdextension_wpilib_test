@@ -12,8 +12,7 @@ void initialize_wpi_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    GDREGISTER_RUNTIME_CLASS(GDExample);
-    GDREGISTER_RUNTIME_CLASS(GDWPINode);
+    GDREGISTER_RUNTIME_CLASS(GDNetworkTable);
 }
 
 void uninitialize_wpi_module(ModuleInitializationLevel p_level) {

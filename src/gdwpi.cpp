@@ -5,37 +5,117 @@
 #include <fmt/format.h>
 #include <networktables/NetworkTableInstance.h>
 #include <networktables/NetworkTable.h>
+#include <networktables/GenericEntry.h>
 
 using namespace godot;
 
-void GDExample::_bind_methods() {
-    
+GDNetworkTable::GDNetworkTable() {}
+
+GDNetworkTable::~GDNetworkTable() {}
+
+void GDNetworkTable::_ready() {
+    inst = nt::NetworkTableInstance::GetDefault();
+    inst.SetServer("localhost");
+    table = inst.GetTable("datatable");
+
+    for(String name : entrylist) {
+        CharString temp = name.utf8();
+        std::string val = temp.get_data();
+        entryMap[val] = table->GetTopic(val).GetGenericEntry();
+    }
+
+    inst.StartClient4("GDNetworkTable");
 }
 
-GDExample::GDExample() {
-    time_passed = 0.0;
+void GDNetworkTable::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("fetch_double", "name"), &GDNetworkTable::fetch_double);
+    ClassDB::bind_method(D_METHOD("fetch_string", "name"), &GDNetworkTable::fetch_string);
+    ClassDB::bind_method(D_METHOD("fetch_int", "name"), &GDNetworkTable::fetch_int);
+
+    ClassDB::bind_method(D_METHOD("push_double", "name", "value"), &GDNetworkTable::push_double);
+    ClassDB::bind_method(D_METHOD("push_string", "name", "value"), &GDNetworkTable::push_string);
+    ClassDB::bind_method(D_METHOD("push_int", "name", "value"), &GDNetworkTable::push_int);
+
+    ClassDB::bind_method(D_METHOD("get_entrylist"), &GDNetworkTable::get_entrylist);
+    ClassDB::bind_method(D_METHOD("set_entrylist", "p_entrylist"), &GDNetworkTable::set_entrylist);
+
+    ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "entrylist", PROPERTY_HINT_TYPE_STRING, String::num(Variant::STRING) + ":"), "set_entrylist", "get_entrylist");
+
+
 }
 
-GDExample::~GDExample() {
+void GDNetworkTable::set_entrylist(Array p_entrylist) {
+    entrylist = p_entrylist;
 }
 
-void GDExample::_process(double delta) {
-    time_passed += delta;
-    Vector2 new_position = Vector2(10.0 + (10.0 * sin(time_passed * 2.0)), 10.0 + (10.0 * cos(time_passed * 1.5)));
-    set_position(new_position);
+Array GDNetworkTable::get_entrylist() {
+    return entrylist;
 }
 
-void GDWPINode::_bind_methods() {
-
+double GDNetworkTable::fetch_double(String name) {
+    if(entrylist.find(name) == -1) {
+        print_line("Error: value not in list");
+        return 0.0;
+    }
+    CharString temp = name.utf8();
+    std::string val = temp.get_data();
+    return (entryMap[val]).GetDouble(0.0);
 }
 
-GDWPINode::GDWPINode() {
-    ntInst = nt::NetworkTableInstance::GetDefault();
-    auto table = ntInst.GetTable("datatable");
-
-    print_line("test");
+String GDNetworkTable::fetch_string(String name) {
+    if(entrylist.find(name) == -1) {
+        print_line("Error: value not in list");
+        return String("");
+    }
+    CharString temp = name.utf8();
+    std::string val = temp.get_data();
+    std::string result = (entryMap[val]).GetString("");
+    return String(result.data());
 }
 
-GDWPINode::~GDWPINode() {
+int GDNetworkTable::fetch_int(String name) {
+    if(entrylist.find(name) == -1) {
+        print_line("Error: value not in list");
+        return 0;
+    }
+    CharString temp = name.utf8();
+    std::string val = temp.get_data();
+    return (entryMap[val]).GetInteger(0);
+}
 
+// returns true on success
+bool GDNetworkTable::push_double(String name, double value) {
+    if(entrylist.find(name) == -1) {
+        print_line(name);
+        print_line("Error: value not in list");
+        return false;
+    }
+    CharString temp = name.utf8();
+    std::string val = temp.get_data();
+    return entryMap[val].SetDouble(value);
+}
+
+bool GDNetworkTable::push_string(String name, String value) {
+    if(entrylist.find(name) == -1) {
+        print_line(name);
+        print_line("Error: value not in list");
+        return false;
+    }
+    CharString temp = name.utf8();
+    std::string val = temp.get_data();
+
+    CharString temp2 = value.utf8();
+    std::string val2 = temp2.get_data();
+    return entryMap[val].SetString(val2);
+}
+
+bool GDNetworkTable::push_int(String name, int value) {
+    if(entrylist.find(name) == -1) {
+        print_line(name);
+        print_line("Error: value not in list");
+        return false;
+    }
+    CharString temp = name.utf8();
+    std::string val = temp.get_data();
+    return entryMap[val].SetInteger(value);
 }

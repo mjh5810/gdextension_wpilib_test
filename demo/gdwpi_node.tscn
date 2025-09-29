@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://c4hpmdmwhivdw"]
+[gd_scene load_steps=2 format=3 uid="uid://c4hpmdmwhivdw"]
 
-[node name="GDWPINode" type="GDWPINode"]
+[ext_resource type="Script" uid="uid://byokrkxh5iicw" path="res://gdwpi_node.gd" id="1_iks1x"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_iks1x")
+
+[node name="GDNetworkTable" type="GDNetworkTable" parent="."]
+pushlist = ["test"]

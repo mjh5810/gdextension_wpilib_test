@@ -57,6 +57,12 @@ else:
 if env["platform"] == "linux":
     env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
 elif env["platform"] == "windows":
-    env.Append(CXXFLAGS=["/std:c++20"])
+    #env.Append(CXXFLAGS=["/std:c++20"])
+    env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
+
+env.Append(COMPILATIONDB_USE_ABSPATH=True)
+env.Tool('compilation_db')
+cdb = env.CompilationDatabase()
+Alias('cdb', cdb)
 
 Default(library)
