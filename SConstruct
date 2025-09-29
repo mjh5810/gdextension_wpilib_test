@@ -27,7 +27,7 @@ env.Append(CPPPATH=["src/",
                     "allwpilib/ntcore/src/generated/main/native/include/",
                     "allwpilib/wpinet/src/main/native/include/"],
             LIBPATH=["demo/bin/"],
-            LIBS=["libntcore", "libwpilibc", "libwpiutil", "libwpimath"])
+            LIBS=["ntcore", "wpilibc", "wpiutil", "wpimath"])
 sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":
@@ -57,8 +57,8 @@ else:
 if env["platform"] == "linux":
     env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
 elif env["platform"] == "windows":
-    #env.Append(CXXFLAGS=["/std:c++20"])
-    env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
+    env.Append(CXXFLAGS=["/std:c++20"])
+    #env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
 
 env.Append(COMPILATIONDB_USE_ABSPATH=True)
 env.Tool('compilation_db')
