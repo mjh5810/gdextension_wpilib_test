@@ -11,17 +11,21 @@
   outputs = { self, nixpkgs, flake-utils, ... }:
   flake-utils.lib.eachDefaultSystem ( system:
     let
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; config.microsoftVisualStudioLicenseAccepted = true;};
+      pkgs = import nixpkgs { inherit system; config.allowUnfree = true;};
     in {
       devShell = pkgs.mkShell { # nix shell
-        packages = with pkgs; [
+      packages = with pkgs; [
+          # directly required
           scons
           cmake
           libgcc
-          #libgccjit
           (enableDebugging godotPackages_4_5.godot)
           ninja
           protobuf
+          apriltag
+          libdatachannel.dev
+
+          # for other things like building allwpilib
           libssh
           zlib
           libatomic_ops
@@ -31,32 +35,23 @@
           xorg.libXcursor
           xorg.libXi
           glfw
-          opencv
           wayland
           wayland-scanner
           wayland-protocols
           gradle
-          openjdk17
-          pkgsCross.mingwW64.buildPackages.gcc
-          #pkgsCross.mingwW64.windows.mcfgthreads
-          #pkgsCross.mingwW64.windows.mingw_w64_pthreads
-          #pkgsCross.mingwW64.windows.mingw_w64_headers
-          #pkgsCross.mingw32.threads
-          #windows.sdk
-          #windows.mingw_w64
-          libdatachannel.dev
-          ccls
-          pyright
+          #openjdk17
+
+          # for the python scripts
+          opencv
           (pkgs.python313.withPackages (python-pkgs: with python-pkgs; [
             opencv4
             numpy
             imutils
           ]))
-          (pkgsCross.mingwW64.windows.mcfgthreads.overrideAttrs {
-            dontDisableStatic = true;
-          })
-          apriltag
-          gdb
+
+          # for dev environment
+          ccls
+          pyright
         ];
         buildInputs = with pkgs; [
           xorg.libX11
@@ -66,7 +61,6 @@
           xorg.libXcursor
           xorg.libXi
           glfw
-          apriltag
         ];
         LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.xorg.libX11 pkgs.libGL ];
         hardeningDisable = ["all"];

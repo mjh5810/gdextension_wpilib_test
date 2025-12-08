@@ -26,7 +26,7 @@ env.Append(CPPPATH=["src/",
                     "allwpilib/ntcore/src/main/native/include/",
                     "allwpilib/ntcore/src/generated/main/native/include/",
                     "allwpilib/wpinet/src/main/native/include/",
-                    "/nix/store/driw4hf80fjn09ly2gxiky58yrm5kv7m-apriltags-3.4.5/include"],
+                    "/nix/store/driw4hf80fjn09ly2gxiky58yrm5kv7m-apriltags-3.4.5/include"], # TODO: pull this properly from my nix shell environment, rather than hardcoding
             LIBPATH=["demo/bin/"],
             LIBS=["libntcore", "libwpilibc", "libwpiutil", "libwpimath", "libwpinet", "libwpiHal", "libapriltag"])
             #CXXFLAGS = os.environ["NIX_CFLAGS_COMPILE"])
