@@ -37,5 +37,7 @@ linux.debug..x86_64 = {
     "res://bin/wpilibc.so" : "",
     "res://bin/libntcore.so" : "",
     "res://bin/libwpiutil.so" : "",
-    "res://bin/libwpimath.so" : ""
+    "res://bin/libwpimath.so" : "",
+    "res://bin/libwpinet.so" : "",
+    "res://bin/libapriltag.so" : ""
 }

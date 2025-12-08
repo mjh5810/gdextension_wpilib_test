@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs";
+    #nixpkgs.url = "nixpkgs";
     systems.url = "github:nix-systems/default";
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -19,7 +19,7 @@
           cmake
           libgcc
           #libgccjit
-          godot_4_4
+          (enableDebugging godotPackages_4_5.godot)
           ninja
           protobuf
           libssh
@@ -44,10 +44,19 @@
           #pkgsCross.mingw32.threads
           #windows.sdk
           #windows.mingw_w64
+          libdatachannel.dev
           ccls
+          pyright
+          (pkgs.python313.withPackages (python-pkgs: with python-pkgs; [
+            opencv4
+            numpy
+            imutils
+          ]))
           (pkgsCross.mingwW64.windows.mcfgthreads.overrideAttrs {
             dontDisableStatic = true;
           })
+          apriltag
+          gdb
         ];
         buildInputs = with pkgs; [
           xorg.libX11
@@ -57,6 +66,7 @@
           xorg.libXcursor
           xorg.libXi
           glfw
+          apriltag
         ];
         LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.xorg.libX11 pkgs.libGL ];
         hardeningDisable = ["all"];

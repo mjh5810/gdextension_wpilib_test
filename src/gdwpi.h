@@ -1,7 +1,6 @@
 #ifndef GDWPI
 #define GDWPI
 
-#include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <networktables/GenericEntry.h>
 

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://26me36mk0v70"]
+
+[node name="CameraHandler" type="CameraHandler" node_paths=PackedStringArray("display_surface")]
+display_surface = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 547.0
+offset_bottom = 547.0

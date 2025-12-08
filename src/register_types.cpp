@@ -1,5 +1,6 @@
 #include "register_types.h"
-#include "gdwpi.h"
+//#include "gdwpi.h"
+#include "camera_handler.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -12,7 +13,8 @@ void initialize_wpi_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    GDREGISTER_RUNTIME_CLASS(GDNetworkTable);
+    //GDREGISTER_RUNTIME_CLASS(GDNetworkTable);
+    GDREGISTER_RUNTIME_CLASS(CameraHandler);
 }
 
 void uninitialize_wpi_module(ModuleInitializationLevel p_level) {

@@ -25,9 +25,11 @@ env.Append(CPPPATH=["src/",
                     "allwpilib/wpimath/src/main/native/thirdparty/gcem/include/",
                     "allwpilib/ntcore/src/main/native/include/",
                     "allwpilib/ntcore/src/generated/main/native/include/",
-                    "allwpilib/wpinet/src/main/native/include/"],
+                    "allwpilib/wpinet/src/main/native/include/",
+                    "/nix/store/driw4hf80fjn09ly2gxiky58yrm5kv7m-apriltags-3.4.5/include"],
             LIBPATH=["demo/bin/"],
-            LIBS=["libntcore", "libwpilibc", "libwpiutil", "libwpimath"])
+            LIBS=["libntcore", "libwpilibc", "libwpiutil", "libwpimath", "libwpinet", "libwpiHal", "libapriltag"])
+            #CXXFLAGS = os.environ["NIX_CFLAGS_COMPILE"])
 sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":
@@ -59,6 +61,13 @@ if env["platform"] == "linux":
 elif env["platform"] == "windows":
     #env.Append(CXXFLAGS=["/std:c++20"])
     env.Append(CXXFLAGS=["-std=c++20", "-fexceptions"])
+
+if env["target"] in ["editor", "template_debug"]:
+    try:
+        doc_data = env.GodotCPPDocData("src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
+        sources.append(doc_data)
+    except AttributeError:
+        print("Not including class reference as we're targeting a pre-4.3 baseline.")
 
 env.Append(COMPILATIONDB_USE_ABSPATH=True)
 env.Tool('compilation_db')

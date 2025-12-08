@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbr8awr82glil"]
+
+[ext_resource type="Script" uid="uid://b0ksoi0jl3354" path="res://node_2d.gd" id="1_8agej"]
+
+[node name="Node" type="Node" node_paths=PackedStringArray("displaySurface")]
+script = ExtResource("1_8agej")
+displaySurface = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 393.0
+offset_bottom = 342.0

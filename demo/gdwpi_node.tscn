@@ -6,4 +6,3 @@
 script = ExtResource("1_iks1x")
 
 [node name="GDNetworkTable" type="GDNetworkTable" parent="."]
-pushlist = ["test"]

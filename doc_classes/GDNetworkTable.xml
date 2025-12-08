@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GDNetworkTable" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+    <brief_description>
+        Interface for the WPILib Network Table system
+	</brief_description>
+    <description>
+        This class provides a way to communicate with a WPILib robot program, primarily designed for use with the XRP system. With current design, this only accesses a Network Table at [code]{localhost}[/code], and with the table name [code]{datatable}[/code]
+    </description>
+    <tutorials>
+    </tutorials>
+    <methods>
+		<method name="fetch_double">
+			<return type="float" />
+			<param index="0" name="name" type="String" />
+            <description>
+                Returns the the double stored in field [code]{name}[/code]
+			</description>
+		</method>
+		<method name="fetch_int">
+			<return type="int" />
+			<param index="0" name="name" type="String" />
+			<description>
+                Returns the the integer stored in field [code]{name}[/code]
+			</description>
+		</method>
+		<method name="fetch_string">
+			<return type="String" />
+			<param index="0" name="name" type="String" />
+			<description>
+                Returns the the string stored in field [code]{name}[/code]
+			</description>
+		</method>
+		<method name="push_double">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<param index="1" name="value" type="float" />
+            <description>
+                Pushes the double [code]{value}[/code] to field [code]{name}[/code]
+			</description>
+		</method>
+		<method name="push_int">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<param index="1" name="value" type="int" />
+            Pushes the integer [code]{value}[/code] to field [code]{name}[/code]
+			<description>
+			</description>
+		</method>
+		<method name="push_string">
+			<return type="bool" />
+			<param index="0" name="name" type="String" />
+			<param index="1" name="value" type="String" />
+			<description>
+                Pushes the string [code]{value}[/code] to field [code]{name}[/code]
+			</description>
+		</method>
+	</methods>
+	<members>
+        <member name="entrylist" type="Array" setter="set_entrylist" getter="get_entrylist" default="[]">
+            <description>
+                A list of all fields that will be accessed from this node.
+            </description>
+		</member>
+	</members>
+</class>

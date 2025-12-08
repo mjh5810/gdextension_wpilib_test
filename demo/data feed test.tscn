@@ -15,7 +15,6 @@ material = SubResource("StandardMaterial3D_1qbex")
 script = ExtResource("1_a5e8f")
 
 [node name="GDNetworkTable" type="GDNetworkTable" parent="CSGBox3D"]
-fetchlist = ["xRot", "yRot", "zRot"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.935832, 0.352446, 0, -0.352446, 0.935832, -0.210518, 1.12803, 2.39931)
