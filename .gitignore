@@ -2,3 +2,6 @@ demo/bin
 .ccls-cache
 .direnv
 apriltags/
+.vscode
+*.obj
+.sconsign.dblite
