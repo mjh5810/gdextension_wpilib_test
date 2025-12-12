@@ -1,5 +1,5 @@
 #include "register_types.h"
-//#include "gdwpi.h"
+#include "gdwpi.h"
 #include "camera_handler.h"
 
 #include <gdextension_interface.h>
@@ -13,7 +13,7 @@ void initialize_wpi_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    //GDREGISTER_RUNTIME_CLASS(GDNetworkTable);
+    GDREGISTER_RUNTIME_CLASS(GDNetworkTable);
     GDREGISTER_RUNTIME_CLASS(CameraHandler);
 }
 

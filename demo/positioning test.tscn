@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://deockl3ofomvo"]
+
+[ext_resource type="Script" uid="uid://b42870r1ccrl2" path="res://simulation.gd" id="1_7aaqt"]
+[ext_resource type="Texture2D" uid="uid://blnvvn2hsuq2y" path="res://icon.svg" id="2_kpg42"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(582, 317)
+
+[node name="Simulation" type="Node2D" parent="."]
+script = ExtResource("1_7aaqt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Simulation"]
+texture = ExtResource("2_kpg42")
+
+[node name="GDNetworkTable" type="GDNetworkTable" parent="Simulation"]
+entrylist = ["x", "y", "rot"]
