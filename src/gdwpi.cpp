@@ -52,6 +52,9 @@ Array GDNetworkTable::get_entrylist() {
     return entrylist;
 }
 
+// currently only supports doubles, strings, and integers but NetworkTables has support for bools, floats, and arrays
+// they were deemed not necessary but should not be difficult to implement if needed
+
 double GDNetworkTable::fetch_double(String name) {
     if(entrylist.find(name) == -1) {
         print_line("Error: value not in list");

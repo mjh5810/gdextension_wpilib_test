@@ -32,7 +32,7 @@ apriltag_detector_t* CameraHandler::create_detector() {
     apriltag_detector_t* td = apriltag_detector_create();
     apriltag_family_t* tf = nullptr;
     tf = tag25h9_create();
-    apriltag_detector_add_family_bits(td, tf, 1);
+    apriltag_detector_add_family_bits(td, tf, 1); // hamming bits
     td->quad_decimate = 2.0;
     td->quad_sigma = 0.0;
     td->nthreads = 1;
@@ -42,23 +42,21 @@ apriltag_detector_t* CameraHandler::create_detector() {
 
 void CameraHandler::_process(float delta) {
     server->poll();
-    //print_line("did process");
     if(server->is_connection_available()) {
-        // print_line("a");
         Ref<PacketPeerUDP> peer = server->take_connection(); // ref is a smart pointer?
         PackedByteArray packet = peer->get_packet();
-        // print_line("b");
         Image* im = memnew(Image);
         im->load_jpg_from_buffer(packet);
-        // print_line("c");
         Ref<ImageTexture> imTex = ImageTexture::create_from_image(im);
         displaySurface->set_texture(imTex);
-        image_u8_t* im_u8 = jpeg_buffer_to_image_u8(packet);
-        // print_line("d");
-        if(mut.try_lock()) {
-            print_line("t");
-            //std::thread t(&CameraHandler::detect_position, im_u8, td, std::ref(mut));
-            detect_position(im_u8, td);
+
+        // apriltag processing, remove if just want camera feed in game
+        if(true) {
+            image_u8_t* im_u8 = jpeg_buffer_to_image_u8(packet);
+            if(mut.try_lock()) {
+                //std::thread t(&CameraHandler::detect_position, im_u8, td, std::ref(mut));
+                detect_position(im_u8, td);
+            }
         }
     }
 }
@@ -89,7 +87,6 @@ image_u8_t* CameraHandler::jpeg_buffer_to_image_u8(PackedByteArray packet) {
 }
 
 void CameraHandler::detect_position(image_u8_t* im, apriltag_detector_t* td) {
-    printf("z");
     zarray_t* detections = apriltag_detector_detect(td, im);
     apriltag_detection_t* first;
     if(zarray_size(detections) == 0) {

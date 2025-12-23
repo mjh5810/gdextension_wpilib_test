@@ -29,6 +29,9 @@
           libssh
           zlib
           libatomic_ops
+          gradle
+
+          # wpilib (on linux)
           #xorg.libX11.dev
           xorg.libXrandr
           xorg.libXinerama
@@ -38,7 +41,6 @@
           wayland
           wayland-scanner
           wayland-protocols
-          gradle
           #openjdk17
 
           # for the python scripts
@@ -49,7 +51,7 @@
             imutils
           ]))
 
-          # for dev environment
+          # for dev environment (LSPs)
           ccls
           pyright
         ];

@@ -1,5 +1,7 @@
 import socket, struct
 
+# attempt to try and reverse engineer and simulate an XRP by breaking down the protocol
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 PORT_RECIEVE = 3540
 

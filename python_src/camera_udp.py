@@ -1,5 +1,7 @@
 import cv2, imutils, socket
 
+# testing script for feeding camera into Godot
+
 cap = cv2.VideoCapture(0)
 
 s_sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
